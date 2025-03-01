@@ -1,11 +1,5 @@
 This is a rethinking of the flasher script by the 13DEVTEAM that was 99% executed by Jonas and tested by docnok63.  The goal was to have one script to flash either a super.img build (typically for CN users) or a mostly fastbootd partitions flasher for non-CN owners.  This new part is based on the revive_13 script by Venkat, so BIG shoutout to him.  There were other minor text output error fixed.
-
-This explanation is clear and well-structured, but I can refine it for better readability and clarity:  
-
----
-
- **Updated Flashing Guide**  
-
+ 
  **1) Initial Fastboot Flashing**  
 - More partitions are now flashed in fastboot to prevent bootloops caused by missing recovery/fastbootd.  
 - If the build includes a `super.img`, it is flashed immediately after.  
@@ -43,7 +37,3 @@ If `super.img` was included in the build, you will be prompted to choose:
 
 **Happy flashing!**  
 *— Doc & Jonas*  
-
----
-
-This keeps the instructions clear while making them easier to follow. Let me know if you'd like any tweaks! 🚀
