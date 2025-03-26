@@ -12,7 +12,7 @@ Step 2: Extract the OTA ZIP
   3. The tool will extract all .IMG files from the OTA package.  
 
 Step 3: Prepare Files for Flashing  
-- Move all extracted .IMG files into the folder: OOS_FILES_HERE**  
+  1. Move all extracted .IMG files into the folder: OOS_FILES_HERE**  
 
 Step 4: Start the Flashing Process  
-- Run the flashing script by executing: Universal_Flasher.bat
+  1. Run the flashing script by executing: Universal_Flasher.bat (Win) or Universal_flasher.sh (Mac/Linux)
