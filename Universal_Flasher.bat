@@ -59,13 +59,18 @@ set "partitions=my_bigball my_carrier my_engineering my_heytap my_manifest my_pr
 :: Check if super.img exists, if not, delete, create & flash logical partitions
 if not exist "super.img" (
     for %%P in (%partitions%) do (
-        %fastboot% delete-logical-partition %%P_a
-        %fastboot% delete-logical-partition %%P_b
-        %fastboot% delete-logical-partition %%P_a-cow
-        %fastboot% delete-logical-partition %%P_b-cow
-        %fastboot% create-logical-partition %%P_a 1
-        %fastboot% create-logical-partition %%P_b 1
-        %fastboot% flash %%P OOS_FILES_HERE\%%P.img
+        set "img_path=OOS_FILES_HERE\%%P.img"
+        if exist !img_path! (
+            %fastboot% delete-logical-partition %%P_a
+            %fastboot% delete-logical-partition %%P_b
+            %fastboot% delete-logical-partition %%P_a-cow
+            %fastboot% delete-logical-partition %%P_b-cow
+            %fastboot% create-logical-partition %%P_a 1
+            %fastboot% create-logical-partition %%P_b 1
+            %fastboot% flash %%P !img_path!
+        ) else (
+            echo Warning: File not found for %%P (!img_path!). Skipping flash...
+        )
     )
 ) else (
     echo super.img found. Logical partition flashes skipped...
