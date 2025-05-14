@@ -89,13 +89,18 @@ partitions=(
 # If super.img does not exist, delete/create & flash logical partitions
 if [ ! -f "super.img" ]; then
     for part in "${partitions[@]}"; do
-        fastboot delete-logical-partition "${part}_a"
-        fastboot delete-logical-partition "${part}_b"
-        fastboot delete-logical-partition "${part}_a-cow"
-        fastboot delete-logical-partition "${part}_b-cow"
-        fastboot create-logical-partition "${part}_a" 1
-        fastboot create-logical-partition "${part}_b" 1
-        fastboot flash "$part" "OOS_FILES_HERE/${part}.img"
+        img_path="OOS_FILES_HERE/${part}.img"
+        if [ -f "$img_path" ]; then
+            fastboot delete-logical-partition "${part}_a"
+            fastboot delete-logical-partition "${part}_b"
+            fastboot delete-logical-partition "${part}_a-cow"
+            fastboot delete-logical-partition "${part}_b-cow"
+            fastboot create-logical-partition "${part}_a" 1
+            fastboot create-logical-partition "${part}_b" 1
+            fastboot flash "$part" "OOS_FILES_HERE/${part}.img"
+        else
+            echo "Warning: File not found for $part ($img_path). Skipping flash..."
+        fi
     done
 else
     echo "super.img found. Logical partition flashes skipped..."
